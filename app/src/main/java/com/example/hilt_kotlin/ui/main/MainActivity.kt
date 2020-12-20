@@ -6,6 +6,7 @@ import com.example.hilt_kotlin.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+// 6. EntryPoint를 프래그먼트를 띄우는 액티비티에도 선언해주어야함
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

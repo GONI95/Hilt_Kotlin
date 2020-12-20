@@ -28,11 +28,11 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     @Inject
     lateinit var repository : MyRepository
 
-    @AppHash    // 10. 어느 모듈을 받을건지 선언
+    @AppHash
     @Inject
     lateinit var applicationHash : String
 
-    @ActivityHash    // 10. 어느 모듈을 받을건지 선언
+    @ActivityHash
     @Inject
     lateinit var activityHash : String
 

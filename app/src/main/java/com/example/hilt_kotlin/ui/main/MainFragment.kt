@@ -21,32 +21,39 @@ import javax.inject.Inject
 
 // https://developer.android.com/training/dependency-injection/hilt-android
 
-// 3. Application 클래스에 Hilt를 설정하고 애플리케이션 수준의 구성요소를 사용할 수 있게되면
-// Hilt는 @AndroidEntryPoint 주석이 있는 다른 Android 클래스에 종속 항목을 제공할 수 있다.
 @AndroidEntryPoint
+// 4. Application 클래스에 Hilt를 설정하고 애플리케이션 수준의 구성요소를 사용할 수 있게되면
+// Hilt는 @AndroidEntryPoint 주석이 있는 다른 Android 클래스에 종속 항목을 제공할 수 있다.
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val activityviewModel by activityViewModels<MainViewModel>()
-    // MainActivity의 lifeCycle이 관리하는 뷰모델
-    // 아래의 뷰모델과 타입은 같지만 또 다른 뷰모델 객체임
+    /**
+     * 생성되는 객체가 같은지 확인을 위해 Second 프래그먼트에도 객체, 로그 등을 생성해줘야함
+     */
 
-    private val viewModel by viewModels<MainViewModel>()
-    // 11. 뷰모델 객체 생성(뷰모델에 힐트 사용을 위해서)
-    // main과 second 프래그먼트에 생성된 객체는 다르지만 주입되는 객체는 같음
-
-    // 4. 종속성 주입을 받고자하는 대상에 @Inject를 표시해주어야함
+    // 5. 종속성 주입을 받고자하는 대상에 @Inject를 표시해주어야함
     @Inject
     lateinit var repository : MyRepository
     // MyRepository 객체를 생성했지만 다른 Activity, Fragment에 있는 객체들과 다른 객체임
 
-    // 10. 어느 모듈을 받을건지 선언
+    // 13. 어느 모듈을 받을건지 선언
     @AppHash
     @Inject
     lateinit var applicationHash : String
+    // 생성한 모듈
 
+    // 13-1. 어느 모듈을 받을건지 선언
     @ActivityHash
     @Inject
     lateinit var activityHash : String
+    // 생성한 모듈
+
+    private val viewModel by viewModels<MainViewModel>()
+    // 15. 뷰모델 객체 생성(뷰모델에 힐트 사용을 위해서)
+    // main과 second 프래그먼트에 생성된 객체는 다르지만 주입되는 객체는 같음
+
+    private val activityviewModel by activityViewModels<MainViewModel>()
+    // 18. MainActivity의 lifeCycle이 관리하는 뷰모델
+    // 아래의 뷰모델과 타입은 같지만 또 다른 뷰모델 객체임
 
     companion object{
         val TAG = MainFragment::class.java.simpleName
